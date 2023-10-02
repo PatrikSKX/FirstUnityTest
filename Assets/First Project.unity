@@ -252,8 +252,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movespeed: 5
+  dashspeed: 30
   player: {fileID: 188079028}
   anim: {fileID: 188079031}
+  playerCol: {fileID: 188079032}
+  ActMovespeed: 0
 --- !u!95 &188079031
 Animator:
   serializedVersion: 5
