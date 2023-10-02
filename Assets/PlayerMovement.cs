@@ -6,9 +6,11 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float movespeed = 5f;
-    public float dashspeed = 15f;
+    public float dashspeed = 30f;
     private float dashDuration = 0.15f;
+    private float dashCooldown = 1f;
     private bool isDash = false;
+    private bool canDash = true;
 
     public Rigidbody2D player;
     public Animator anim;
@@ -35,10 +37,11 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("Vertical", movement.y);
         anim.SetFloat("Speed", movement.sqrMagnitude);
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && canDash)
         {
             
             StartCoroutine(Dash());
+            StartCoroutine(DashCooldown());
         }
 
     }
@@ -61,4 +64,12 @@ public class PlayerMovement : MonoBehaviour
         playerCol.enabled = true;
         isDash = false;
     }
+
+    private IEnumerator DashCooldown()
+    {
+        canDash = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
+
 }
